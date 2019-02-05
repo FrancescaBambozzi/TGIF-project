@@ -2,7 +2,6 @@
 
 var members = data.results[0].members;
 
-
 // Step 2. Create a loop over that array.
 
    /* create a new array of newMembArrayects (newMembArray === each member profile) containing only the properties needed.
@@ -12,7 +11,7 @@ var members = data.results[0].members;
 
 function createNewArray(){
 
-window.newMembArray = members.map(person => ({ Name: person.first_name, //use window.variable object to make the var global
+window.newMembArray = members.map(person => ({ Name: person.first_name, //use window.var object to make the var global
                                                MiddleName:person.middle_name, 
                                                Surname: person.last_name, 
                                                Party: person.party, 
@@ -25,23 +24,39 @@ window.newMembArray = members.map(person => ({ Name: person.first_name, //use wi
 
 // Step 3. The loop has to generate a table displaying the newMembArray data.
                      
-var table = document.getElementById("senate-data"); //give this ID to the table in HTML
-
 function generateTable(){
+    
+    var table = document.getElementById("senate-data"); //give this ID to the table in HTM
+    var header = table.createTHead();
+    var row = header.insertRow(0);
+    var cell = row.insertCell(0);
+    cell.innerHTML = "<b>This is a table header</b>";
 
+    /*
 for (var i = 0; i < newMembArray.length; i++) {
     
     var row = table.insertRow(i);
    
     for(key in newMembArray[i]){
+
+      var cell = row.insertCell(0);
+      var cellContent = newMembArray[i][key];
         
-      var cell = row.insertCell(0)
-      cell.innerHTML = newMembArray[i][key];
-}
-};
+        if(key === 'Name'){
+            
+            var cellLink = members[i].url;
+            cell.innerHTML = cellContent.link(cellLink);
+
+                
+        } else {
+            
+            cell.innerHTML = cellContent;
+        }
+    } */
+
 };
 
-console.log(table);
+};
 
 createNewArray();
 generateTable();
