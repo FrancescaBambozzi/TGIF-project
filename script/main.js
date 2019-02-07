@@ -26,21 +26,21 @@ window.newMembArray = members.map(person => ({ Name: [person.first_name, person.
                      
 function generateTable(){
     
-    var table = document.getElementById("senate-data"); //give this ID to the table in HTM
+    var table = document.getElementById("dataTable"); //give this ID to the table in HTML of both House and Senate Page
     
     var header = table.createTHead();   
     var rowHead = header.insertRow(0);
     
     var name = rowHead.insertCell(0);
     name.innerHTML = "Name";
-    var name = rowHead.insertCell(1);
-    name.innerHTML = "Party";
-    var name = rowHead.insertCell(2);
-    name.innerHTML = "State";
-    var name = rowHead.insertCell(3);
-    name.innerHTML = "Seniority";
-    var name = rowHead.insertCell(4);
-    name.innerHTML = "Votes";
+    var party = rowHead.insertCell(1);
+    party.innerHTML = "Party";
+    var state = rowHead.insertCell(2);
+    state.innerHTML = "State";
+    var seniority = rowHead.insertCell(3);
+    seniority.innerHTML = "Seniority";
+    var votes = rowHead.insertCell(4);
+    votes.innerHTML = "Votes";
     
     var body = document.createElement("tbody");
   
@@ -76,3 +76,32 @@ for (var i = 0; i < newMembArray.length; i++) {
 
 createNewArray();
 generateTable();
+
+//CHECKBOXES FUNCTION
+
+/*    var democratButton = document.getElementById("democrat-button");
+    democratButton.addEventListener('click', () => {
+        
+        console.log(democrats);
+    }); */
+
+var democrats = members.filter(val => val.party == 'D');
+var republicans = members.filter(val => val.party == 'R');
+var independents = members.filter(val => val.party == 'I');
+
+
+function filterTable() {
+    
+    var checkBox = document.getElementById("democrat-button");
+    
+     if (checkBox.checked == true && ){
+         
+         console.log(democrats);
+         
+  } else {
+    
+  }
+}
+
+
+filterTable(); 

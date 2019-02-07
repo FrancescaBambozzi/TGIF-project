@@ -1,0 +1,11 @@
+/* Grid Style*/
+#company-name {
+              float: right;
+}
+
+.showItem {
+    display: list-item;
+}
+.hideItem {
+    display: none;
+}
