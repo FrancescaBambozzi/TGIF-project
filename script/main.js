@@ -78,30 +78,16 @@ createNewArray();
 generateTable();
 
 //CHECKBOXES FUNCTION
+// 1) Get 'checked' values
 
-/*    var democratButton = document.getElementById("democrat-button");
-    democratButton.addEventListener('click', () => {
-        
-        console.log(democrats);
-    }); */
+// 2) Store those values in one array.
 
-var democrats = members.filter(val => val.party == 'D');
-var republicans = members.filter(val => val.party == 'R');
-var independents = members.filter(val => val.party == 'I');
+// 3) Use that array to create a new array of only filtered values by using .filter() on the table containing the members.
 
+// 4) The new array should pass through a function that creates a new table with that new values inside the array passed.
 
-function filterTable() {
-    
-    var checkBox = document.getElementById("democrat-button");
-    
-     if (checkBox.checked == true && ){
-         
-         console.log(democrats);
-         
-  } else {
-    
-  }
-}
+// 5) Call that function() WHEN a checkbox is selected (onchange event).
 
 
-filterTable(); 
+
+
