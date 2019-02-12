@@ -3,9 +3,15 @@
               float: right;
 }
 
-.showItem {
-    display: list-item;
+#alertSelection {
+                display: none;
 }
-.hideItem {
-    display: none;
+
+thead {
+       background-color: #d8eeff;
+       font-weight: 600;
+}
+
+td {
+    width: 250px;
 }
