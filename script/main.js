@@ -7,10 +7,12 @@ var independentButton = document.getElementById("independent-button");
 var republicanButton = document.getElementById("republican-button");
 
 /*Call the function generateTable && the function createNewArray at the beginning, so that once the page in open, a table is generated with the "var members" info */
-
+createDropOptions();
 generateTable(createNewArray(members));
 
 //Call the function printFilteredTable() on click.
+var input = document.getElementById("state-filter")
+input.addEventListener("change", printFilteredTable);
 democratButton.addEventListener("click", printFilteredTable);
 republicanButton.addEventListener("click", printFilteredTable);
 independentButton.addEventListener("click", printFilteredTable);
@@ -56,7 +58,6 @@ function generateTable(newMembArray) {
     party.innerHTML = "Party";
     var state = rowHead.insertCell(2);
     state.innerHTML = "State";
-    state.setAttribute("class", "state") //Add a class to the TD where state is
     var seniority = rowHead.insertCell(3);
     seniority.innerHTML = "Seniority";
     var votes = rowHead.insertCell(4);
@@ -96,29 +97,77 @@ function generateTable(newMembArray) {
 // Create a new array of only filtered values by using .filter() on the members array -- push those values inside the checkboxesValuesArray.
 
 function filterMembers() {
-    
+
     var checkboxesValuesArray = []; //Get 'checked' values from checkboxes and store them in a new array.
     for (var i = 0; i < members.length; i++) {
 
-        if (members[i].party == "D" && democratButton.checked == true) {
-            checkboxesValuesArray.push(members[i]);
-            document.getElementById("alertSelection").style.display = "none";
-            
-        } else if (members[i].party == "R" && republicanButton.checked == true) {
-            checkboxesValuesArray.push(members[i]);
-            document.getElementById("alertSelection").style.display = "none";
-            
-        } else if (members[i].party == "I" && independentButton.checked == true) {
-            checkboxesValuesArray.push(members[i]);
-            document.getElementById("alertSelection").style.display = "none";
-            
-        } else if (democratButton.checked == false && republicanButton.checked == false && independentButton.checked == false) {
+        if (input.value == "Select a state" || input.value == members[i].state) {
 
-            document.getElementById("alertSelection").style.display = "block";
+            if (members[i].party == "D" && democratButton.checked == true) {
+                checkboxesValuesArray.push(members[i]);
+                document.getElementById("alertSelection").style.display = "none";
 
+            } else if (members[i].party == "R" && republicanButton.checked == true) {
+                checkboxesValuesArray.push(members[i]);
+                document.getElementById("alertSelection").style.display = "none";
+
+            } else if (members[i].party == "I" && independentButton.checked == true) {
+                checkboxesValuesArray.push(members[i]);
+                document.getElementById("alertSelection").style.display = "none";
+
+            } else if (democratButton.checked == false && republicanButton.checked == false && independentButton.checked == false) {
+
+                document.getElementById("alertSelection").style.display = "block";
+
+            }
         }
     }
 
     return checkboxesValuesArray;
 }
 
+
+//Generate a dropdown menu with "state" options.
+function createDropOptions() {
+    var dropdownMenu = document.getElementById("state-filter");
+    var optionsArray = members.map(getState => getState.state);
+    optionsArray.sort();
+
+    var stateArray = optionsArray.filter(function (item, index) {
+        return optionsArray.indexOf(item) == index;
+    })
+
+    for (var i = 0; i < stateArray.length; i++) {
+        var stateSelection = stateArray[i];
+        var dropElement = document.createElement("option");
+        dropElement.textContent = stateSelection;
+        dropElement.value = stateSelection;
+        dropdownMenu.appendChild(dropElement);
+    }
+}
+
+//Filter the table (created by a function) through the dropdown menu
+
+
+/*function filterByState() {
+
+    var input = document.getElementById("state-filter");
+    var filter = input.value;
+    var table = document.getElementById("dataTable");
+    var tr = table.getElementsByTagName("tr");
+
+    for (var i = 0; i < tr.length; i++) {
+
+        td = tr[i].getElementsByTagName("td")[2]; //access the td where the state info is
+        if (td) {
+            if (td.innerHTML.indexOf(filter) > -1) {
+                tr[i].style.display = "";
+
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+
+    }
+}
+*/
