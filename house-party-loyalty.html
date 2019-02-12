@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Bootstrao Mobile-First approach-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+         <!-- Bootstrap CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        
+        <title>House Loyalty</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    
+    <body>
+<!--- HEADER --->  
+
+     <header>
+        <div class="container">
+                <img src="img/006-speech-2.png" alt="logo">
+                <h1 id="company-name">Transparent Government in Fact</h1>
+            
+            </div>
+  
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    
+                    <ul class="nav navbar-nav">
+                        <li><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/home.html">Home</a></li>
+                        <!--Congress dropdown-->
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Congress 113 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-data.html">Senate</a></li>
+                                <li><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-data.html">House</a></li>
+                            </ul>
+                        </li>
+                         <!--Attendance dropdown-->
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Attendance <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-attendance.html">Senate Attendance</a></li>
+                                <li><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-attendance.html">House Attendance</a></li>
+                            </ul>
+                        </li>
+                         <!--Loyalty dropdown-->
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Party Loyalty <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-party-loyalty.html">Senate Loyalty</a></li>
+                                <li class="active"><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-party-loyalty.html">House Loyalty</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!--email icon-->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>Email Us</a></li>
+                    </ul>
+                  </div>
+                
+                    <!--the NavBar become a list-square for smaller devices-->                
+                    <div class="navbar-header"> 
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span> 
+                        </button>
+                    </div>
+            </nav>
+            
+        </header>
+        <!--Table container-->
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-2"></div>
+                
+                 <div class="col-lg-8">
+                     
+                     <div class="page-header">
+                         <h2>Party Loyalty</h2>
+                     </div>
+                     
+            <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and legislation that backs their party's agenda.</p>
+    	    
+            <h2>House at a glance</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Party</th>
+                        <th>Number of Reps</th>
+                        <th>% Voted with Prty</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <h2>Least Loyal (Bottom 10% Attendance)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Number of Missed Votes</th>
+                        <th>% Missed</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <h2>Most Loyal (Top 10% Attendance)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Number of Missed Votes</th>
+                        <th>% Missed</th>
+                    </tr>
+                </thead>
+            </table>
+                
+            <div class="col-lg-2">
+                  
+            </div>
+                </div>
+            </div>
+    	</div> 
+        
+         <footer class="jumbotron">         
+        <p class="text-center">&copy;2016 | All Rights reserved.</p>        
+        </footer>
+        
+            <!--- Scripts -->
+    <script src="script/congress-113-senate.js"></script>
+    <script src="script/main.js">
+        
+        
+        
+        </script>
+        
+    <!--Bootstrap-->    
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+        
+</body>
+</html>
