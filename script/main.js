@@ -358,10 +358,10 @@ function createGlanceTable(array){
     document.getElementById("glance-table-body").appendChild(totRow);
 }
 
-/*
-createBigTable(engagementTable["least_engaged"]);
+createLeastEngTable(engagementTable["least_engaged"]);
+createMostEngTable(engagementTable["most_engaged"]);
 
-function createBigTable (array) {
+function createLeastEngTable(array) {
     for (var i = 0; i < array.length; i ++){
         
         var row = document.createElement("tr");
@@ -370,16 +370,33 @@ function createBigTable (array) {
         var votes = document.createElement("td");
         votes.innerHTML = array[i]["Votes"];
         var prc = document.createElement("td");
-        prc.innerHTML = array[i]["VotesPerc"];
+        prc.innerHTML = array[i]["VotesPerc"] + ' %';
         
         row.appendChild(names)
         row.appendChild(votes)
         row.appendChild(prc)
         document.getElementById("least-engaged-table").appendChild(row);
-      //  document.getElementById("most-engaged-table").appendChild(row);
-        
     }
   
-} */
+} 
+
+function createMostEngTable(array) {
+    for (var i = 0; i < array.length; i ++){
+        
+        var row = document.createElement("tr");
+        var names = document.createElement("td");
+        names.innerHTML = array[i]["Name"];
+        var votes = document.createElement("td");
+        votes.innerHTML = array[i]["Votes"];
+        var prc = document.createElement("td");
+        prc.innerHTML = array[i]["VotesPerc"] + ' %';
+        
+        row.appendChild(names)
+        row.appendChild(votes)
+        row.appendChild(prc)
+        document.getElementById("most-engaged-table").appendChild(row);
+    } 
+  
+} 
 
 /*---------------------------------------------------------------------------------*/    
