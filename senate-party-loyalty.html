@@ -44,8 +44,8 @@
                          <!--Loyalty dropdown-->
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Party Loyalty <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li class="active"><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-attendance.html">Senate Loyalty</a></li>
-                                <li><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-attendance.html">House Loyalty</a></li>
+                                <li class="active"><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-party-loyalty.html">Senate Loyalty</a></li>
+                                <li><a href="file:///C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-party-loyalty.html">House Loyalty</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -64,24 +64,23 @@
                         </button>
                     </div>
             </nav>
-            
         </header>
+        
         <!--Table container-->
         <div class="container">
             <div class="row">
-                
-                <div class="col-lg-2"></div>
-                
-                 <div class="col-lg-8">
+                <div class="col-lg-6">
                      
                      <div class="page-header">
                          <h2>Party Loyalty</h2>
                      </div>
                      
             <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and legislation that backs their party's agenda.</p>
-    	    
+             </div>
+             
+            <div class="col-lg-6">
             <h2>Senate at a glance</h2>
-            <table class="table table-striped smallTables">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Party</th>
@@ -89,10 +88,15 @@
                         <th>% Voted with Prty</th>
                     </tr>
                 </thead>
+                <tbody id="glance-table-body"></tbody>
             </table>
-
+             </div>
+            </div>
+            
+            <div class="row">
+            <div class="col-lg-6">
             <h2>Least Loyal (Bottom 10% Attendance)</h2>
-            <table class="table table-striped smallTables">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -100,10 +104,13 @@
                         <th>% Missed</th>
                     </tr>
                 </thead>
+                <tbody id="least-loyal-table"></tbody>
             </table>
-
+            </div>
+            
+            <div class="col-lg-6">
             <h2>Most Loyal (Top 10% Attendance)</h2>
-            <table class="table table-striped smallTables">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -111,13 +118,10 @@
                         <th>% Missed</th>
                     </tr>
                 </thead>
+                <tbody id="most-loyal-table"></tbody>
             </table>
-                
-            <div class="col-lg-2">
-                  
-            </div>
-                </div>
-            </div>
+             </div>
+             </div>   
     	</div> 
         
          <footer class="jumbotron">         
@@ -126,11 +130,8 @@
         
             <!--- Scripts -->
     <script src="script/congress-113-senate.js"></script>
-    <script src="script/main.js">
-        
-        
-        
-        </script>
+   <script src="script/main.js"></script>
+    <script src="script/loyalty.js"></script>
         
     <!--Bootstrap-->    
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -166,27 +166,6 @@ var statistics = [
                   "independent_average_votes_with_party": (sumPercentByParty(totalMembersPerParty("I"))/ totalMembersPerParty("I").length).toFixed(2),
                   "percentage_votes_with_party": ((sumPercentByParty(totalMembersPerParty("D"))/ totalMembersPerParty("D").length + sumPercentByParty(totalMembersPerParty("R"))/ totalMembersPerParty("R").length + sumPercentByParty(totalMembersPerParty("I"))/ totalMembersPerParty("I").length) / 3).toFixed(2)
   
-                  },
-                  { //Engagement table (attendance pages)
-                  "least_engaged": lowestTenPercentOfEngaged().map(person => ({ 
-                                          Name: [person.first_name, person.middle_name, person.last_name].join(" "),
-                                          Votes: person.missed_votes,
-                                          VotesPerc: person.missed_votes_pct})),
-                  "most_engaged": greaterTenPercentOfEngaged().map(person => ({ 
-                                          Name: [person.first_name, person.middle_name, person.last_name].join(" "),
-                                          Votes: person.missed_votes,
-                                          VotesPerc: person.missed_votes_pct}))
-                  },
-                  { //Loyalty table (loyalty pages)
-                  "least_loyal": lowestTenPercentOfVoters().map(person => ({ 
-                                          Name: [person.first_name, person.middle_name, person.last_name].join(" "),
-                                          Votes: person.total_votes,
-                                          VotesPerc: person.votes_with_party_pct })),
-                  "most_loyal": greaterTenPercentOfVoters().map(person => ({ 
-                                          Name: [person.first_name, person.middle_name, person.last_name].join(" "),
-                                          Votes: person.total_votes,
-                                          VotesPerc: person.votes_with_party_pct }))
-                      
                   }
                   ]
 
@@ -213,105 +192,15 @@ function findAvarage(totPercentArray, arrayLenght){
     return average;
     
 } 
-    
-        
-/* -------------------------------------------------------------------------------------------   */ 
-
-//Find least loyal    
-function lowestTenPercentOfVoters() { 
-    var votes = [];
-    var lowestTenPercent = [];
-    
-    members.sort(function (a, b) {
-        return a.votes_with_party_pct - b.votes_with_party_pct;
-    });
-    for (i = 0; i < members.length; i++) {
-        votes.push(members[i]);
-    }
-    for (i = 0; i < votes.length; i++) {
-        if (i < ((votes.length) * 0.1)) {
-            lowestTenPercent.push(votes[i]);
-        } else if (votes[i] == votes[i - 1]) {
-            lowestTenPercent.push(votes[i]);
-        } 
-    }
-    return lowestTenPercent;
-}
-
-//Find most loyal     
-function greaterTenPercentOfVoters() { 
-    var votes = [];
-    var greaterTenPercent = [];
-    
-    members.sort(function (a, b) {
-        return b.votes_with_party_pct - a.votes_with_party_pct;
-    });
-    for (i = 0; i < members.length; i++) {
-        votes.push(members[i]);
-    }
-    for (i = 0; i < votes.length; i++) {
-        if (i < ((votes.length) * 0.1)) {
-            greaterTenPercent.push(votes[i]);
-        } else if (votes[i] == votes[i - 1]) {
-            greaterTenPercent.push(votes[i]);
-        } 
-    }
-    return greaterTenPercent;
-}    
-
-/* ------------------------------------------------------------------------------------------------------------ */
-
-//Find least engaged     
-function lowestTenPercentOfEngaged() { 
-    var votes = [];
-    var lowestTenPercent = [];
-    
-    members.sort(function (a, b) {
-        return a.missed_votes_pct - b.missed_votes_pct;
-    });
-    for (i = 0; i < members.length; i++) {
-        votes.push(members[i]);
-    }
-    for (i = 0; i < votes.length; i++) {
-        if (i < ((votes.length) * 0.1)) {
-            lowestTenPercent.push(votes[i]);
-        } else if (votes[i] == votes[i - 1]) {
-            lowestTenPercent.push(votes[i]);
-        } 
-    }
-    return lowestTenPercent;
-}
-
-//Find most engaged     
-function greaterTenPercentOfEngaged() { 
-    var votes = [];
-    var greaterTenPercent = [];
-    
-    members.sort(function (a, b) {
-        return b.missed_votes_pct - a.missed_votes_pct;
-    });
-    for (i = 0; i < members.length; i++) {
-        votes.push(members[i]);
-    }
-    for (i = 0; i < votes.length; i++) {
-        if (i < ((votes.length) * 0.1)) {
-            greaterTenPercent.push(votes[i]);
-        } else if (votes[i] == votes[i - 1]) {
-            greaterTenPercent.push(votes[i]);
-        }
-    }
-    return greaterTenPercent;
-}
-
 
 /*--------------------------------------------------------*/
 //Creates arrays to work with in order to create the tables.
-
+var house = statistics[0];
 var senate = statistics[0];
 var senateAtGlance = Object.values(senate);
-var engagementTable = statistics[1];
-var loyaltyTable = statistics[2];
+var houseAtGlance = Object.values(house);
 
+console.log(houseAtGlance)
 //Function to create the 'Senate at a glance' table
 createGlanceTable(senateAtGlance);
 function createGlanceTable(array){
@@ -358,45 +247,5 @@ function createGlanceTable(array){
     document.getElementById("glance-table-body").appendChild(totRow);
 }
 
-createLeastEngTable(engagementTable["least_engaged"]);
-createMostEngTable(engagementTable["most_engaged"]);
+/*----------------------------------------------------------------*/
 
-function createLeastEngTable(array) {
-    for (var i = 0; i < array.length; i ++){
-        
-        var row = document.createElement("tr");
-        var names = document.createElement("td");
-        names.innerHTML = array[i]["Name"];
-        var votes = document.createElement("td");
-        votes.innerHTML = array[i]["Votes"];
-        var prc = document.createElement("td");
-        prc.innerHTML = array[i]["VotesPerc"] + ' %';
-        
-        row.appendChild(names)
-        row.appendChild(votes)
-        row.appendChild(prc)
-        document.getElementById("least-engaged-table").appendChild(row);
-    }
-  
-} 
-
-function createMostEngTable(array) {
-    for (var i = 0; i < array.length; i ++){
-        
-        var row = document.createElement("tr");
-        var names = document.createElement("td");
-        names.innerHTML = array[i]["Name"];
-        var votes = document.createElement("td");
-        votes.innerHTML = array[i]["Votes"];
-        var prc = document.createElement("td");
-        prc.innerHTML = array[i]["VotesPerc"] + ' %';
-        
-        row.appendChild(names)
-        row.appendChild(votes)
-        row.appendChild(prc)
-        document.getElementById("most-engaged-table").appendChild(row);
-    } 
-  
-} 
-
-/*---------------------------------------------------------------------------------*/    
