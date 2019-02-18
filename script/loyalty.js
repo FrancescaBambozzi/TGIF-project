@@ -55,33 +55,17 @@ function greaterTenPercentOfVoters() {
     return greaterTenPercent;
 }    
 
-createLeastLoyalTable(loyaltyTable["least_loyal"]);
-function createLeastLoyalTable(array) {
-    for (var i = 0; i < array.length; i ++){
-        
-        var row = document.createElement("tr");
-        var names = document.createElement("td");
-        names.innerHTML = array[i]["Name"];
-        var votes = document.createElement("td");
-        votes.innerHTML = array[i]["Votes"];
-        var prc = document.createElement("td");
-        prc.innerHTML = array[i]["VotesPerc"] + ' %';
-        
-        row.appendChild(names)
-        row.appendChild(votes)
-        row.appendChild(prc)
-        document.getElementById("least-loyal-table").appendChild(row);
-    }
-  
-} 
+createLeastLoyalTable(loyaltyTable["least_loyal"] , "least-loyal-table");
+createLeastLoyalTable(loyaltyTable["most_loyal"] , "most-loyal-table");
 
-createMostLoyalTable(loyaltyTable["most_loyal"]);
-function createMostLoyalTable(array) {
+function createLeastLoyalTable(array, id) {
     for (var i = 0; i < array.length; i ++){
         
         var row = document.createElement("tr");
         var names = document.createElement("td");
-        names.innerHTML = array[i]["Name"];
+        var cellContent = names.innerHTML = array[i]["Name"];
+        var cellLink = members[i].url;
+        names.innerHTML = cellContent.link(cellLink);
         var votes = document.createElement("td");
         votes.innerHTML = array[i]["Votes"];
         var prc = document.createElement("td");
@@ -90,7 +74,7 @@ function createMostLoyalTable(array) {
         row.appendChild(names)
         row.appendChild(votes)
         row.appendChild(prc)
-        document.getElementById("most-loyal-table").appendChild(row);
+        document.getElementById(id).appendChild(row);
     }
   
 } 

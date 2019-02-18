@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Laila:400,500,600,700');
+
 /* Grid Style*/
 #company-name {
               float: right;
@@ -14,4 +16,71 @@ thead {
 
 td {
     width: 250px;
+}
+
+.header-container {
+                   display: flex;
+                   width: 100%;
+                   flex-flow: column wrap;
+                   justify-content: center;
+                   align-items: center;
+                   padding-top: 30px;
+                   background-image: linear-gradient(to bottom, #D8EEFF, #F9F9F9);
+}
+
+#home-header {
+              height: 100%;
+}
+
+#home-nav {
+           margin-top: 30px;
+           padding-left: 0;
+}
+
+#home-nav .navbar-right {
+                         padding-right: 0;
+                         padding-left: 80px;
+}
+
+.navbar {
+         padding-left: 120px; 
+         background-image: linear-gradient(to right, #232526, #414345);
+}
+
+.navbar-right {
+              padding-right: 200px; 
+} 
+
+.main-container {
+            padding-bottom: 60px;
+}
+
+.panel-group{
+            padding-top: 30px;
+}
+ 
+footer {
+        background-image: linear-gradient(to right, #232526, #414345);
+        color: white;
+        height: 100px;
+        border-radius: 3% 3% 0 0;
+}
+
+footer p {
+          padding-top: 40px;
+}
+
+.col-lg-3 {
+          padding-top: 80px;
+}
+
+h1 {
+    font-family: 'Laila', serif;
+    font-size: 90px;
+    letter-spacing: -10px;
+ 
+}
+
+#party-filter {
+              padding-top: 60px;
 }

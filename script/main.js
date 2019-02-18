@@ -177,32 +177,20 @@ function totalMembersPerParty (party) {
 }
 
 
-    // 2. create a function to find the TOT % of voting for each party
+//Function to find the TOT % of voting for each party
 function sumPercentByParty(array){
 
     var totalPercent = array.reduce((accumulator, percentage) => accumulator + percentage.votes_with_party_pct, 0);
-    return totalPercent;
-    
+    return totalPercent; 
 }    
-    
-// 3. create a function to find the AVERAGE % of voting for each party (divide the tot % / n° of members for each party)
-function findAvarage(totPercentArray, arrayLenght){
-    
-    var average = totPercentArray / arrayLenght;
-    return average;
-    
-} 
 
 /*--------------------------------------------------------*/
 //Creates arrays to work with in order to create the tables.
-var house = statistics[0];
-var senate = statistics[0];
-var senateAtGlance = Object.values(senate);
-var houseAtGlance = Object.values(house);
+var glance = statistics[0];
+var tableAtGlance = Object.values(glance);
 
-console.log(houseAtGlance)
 //Function to create the 'Senate at a glance' table
-createGlanceTable(senateAtGlance);
+createGlanceTable(tableAtGlance);
 function createGlanceTable(array){
     
     var demoRow = document.createElement("tr");

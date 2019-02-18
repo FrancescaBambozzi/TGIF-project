@@ -63,7 +63,9 @@ function createLeastEngTable(array) {
         
         var row = document.createElement("tr");
         var names = document.createElement("td");
-        names.innerHTML = array[i]["Name"];
+        var cellContent = names.innerHTML = array[i]["Name"];
+        var cellLink = members[i].url;
+        names.innerHTML = cellContent.link(cellLink);
         var votes = document.createElement("td");
         votes.innerHTML = array[i]["Votes"];
         var prc = document.createElement("td");
@@ -73,16 +75,18 @@ function createLeastEngTable(array) {
         row.appendChild(votes)
         row.appendChild(prc)
         document.getElementById("least-engaged-table").appendChild(row);
-    }
-  
+
 } 
+}
 
 function createMostEngTable(array) {
     for (var i = 0; i < array.length; i ++){
         
         var row = document.createElement("tr");
         var names = document.createElement("td");
-        names.innerHTML = array[i]["Name"];
+        var cellContent = names.innerHTML = array[i]["Name"];
+        var cellLink = members[i].url;
+        names.innerHTML = cellContent.link(cellLink);
         var votes = document.createElement("td");
         votes.innerHTML = array[i]["Votes"];
         var prc = document.createElement("td");
