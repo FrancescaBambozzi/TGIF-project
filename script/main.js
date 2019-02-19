@@ -1,37 +1,52 @@
-var members = data.results[0].members;
-
+var members;
+//Senate & House Pages
 if (location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-data.html' || location.pathname == "/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-data.html") {
 
-    // Step 1. The var newMembArray = {..} contains a "results" field. The "results" field contains an array (members) -- ACCESS that ARRAY.
-
-    
     var democratButton = document.getElementById("democrat-button");
     var independentButton = document.getElementById("independent-button");
     var republicanButton = document.getElementById("republican-button");
-     var input = document.getElementById("state-filter")
-    input.addEventListener("change", printFilteredTable);
-    democratButton.addEventListener("click", printFilteredTable);
-    republicanButton.addEventListener("click", printFilteredTable);
-    independentButton.addEventListener("click", printFilteredTable);
+    var input = document.getElementById("state-filter")
+
+    if (location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-data.html') {
+        getData("senate");
+    }
+    if (location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-data.html') {
+        getData("house");
+    }
 
 
-    /*Call the function generateTable && the function createNewArray at the beginning, so that once the page in open, a table is generated with the "var members" info */
-    createDropOptions();
-    generateTable(createNewArray(members));
+    function getData(chamber) {
+        fetch("https://api.propublica.org/congress/v1/113/" + chamber + "/members.json", {
 
-    //Call the function printFilteredTable() on click.
-   
+                method: "GET",
+                headers: new Headers({
+                    "X-API-Key": '8pToDd0vDGdgeKF7E7BH3SfKcegp4QMJowvY45sN'
+                })
+            })
+
+            .then(function (response) {
+                return response.json();
+            }).then(function (json) {
+                data = json;
+                members = data.results[0].members;
+                input.addEventListener("change", printFilteredTable);
+                democratButton.addEventListener("click", printFilteredTable);
+                republicanButton.addEventListener("click", printFilteredTable);
+                independentButton.addEventListener("click", printFilteredTable);
+
+                createDropOptions();
+                generateTable(createNewArray(members));
+
+
+            }).catch(function (error) {
+                console.log(error)
+            })
+    }
+
 
     function printFilteredTable() {
         generateTable(createNewArray(filterMembers()))
     }
-
-
-    /* create a new array (newMembArray === each member profile) containing only the properties needed.
-       - the .map() method iterate through each element of the array
-       - then, it creates a function that perform like this: 
-         inside the new array(newMembArray) STORE only the elements with the following properties: */
-
 
     function createNewArray(member) {
 
@@ -151,89 +166,343 @@ if (location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate
         }
     }
 
-}    
-//TASK 3
-    
-//Create a Json Object with a key for each statistic that will be displayed in the tables
-var statistics = [
-                 { //Senate at a glance table
-                  "tot_democrat": totalMembersPerParty("D").length,
-                  "tot_republican": totalMembersPerParty("R").length,
-                  "tot_independent": totalMembersPerParty("I").length,
-                  "tot_represantives": totalMembersPerParty("D").length + totalMembersPerParty("R").length + totalMembersPerParty("I").length,
-                  "democrats_average_votes_with_party": (sumPercentByParty(totalMembersPerParty("D"))/ totalMembersPerParty("D").length).toFixed(2),
-                  "republican_average_votes_with_party": (sumPercentByParty(totalMembersPerParty("R"))/ totalMembersPerParty("R").length).toFixed(2),
-                  "independent_average_votes_with_party": (sumPercentByParty(totalMembersPerParty("I"))/ totalMembersPerParty("I").length).toFixed(2),
-                  "percentage_votes_with_party": ((sumPercentByParty(totalMembersPerParty("D"))/ totalMembersPerParty("D").length + sumPercentByParty(totalMembersPerParty("R"))/ totalMembersPerParty("R").length + sumPercentByParty(totalMembersPerParty("I"))/ totalMembersPerParty("I").length) / 3).toFixed(2)
-  
+}
+
+//Attendance Pages &  'At a Glance Table' 
+if (location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-attendance.html' || location.pathname == "/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-attendance.html" || location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-party-loyalty.html' || location.pathname == "/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-party-loyalty.html") {
+
+    //declare global variables to use in the page
+    var statistics;
+    var glance;
+    var tableAtGlance;
+    var engagementTable;
+
+    if (location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-attendance.html' || location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-party-loyalty.html') {
+        getData("senate");
+    }
+    if (location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-attendance.html' || location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-party-loyalty.html') {
+        getData("house");
+    }
+
+    function getData(chamber) {
+        fetch("https://api.propublica.org/congress/v1/113/" + chamber + "/members.json", {
+
+                method: "GET",
+                headers: new Headers({
+                    "X-API-Key": '8pToDd0vDGdgeKF7E7BH3SfKcegp4QMJowvY45sN'
+                })
+            })
+
+            .then(function (response) {
+                return response.json();
+            }).then(function (json) {
+                data = json;
+                members = data.results[0].members;
+
+                statistics = [
+                    { //Senate at a glance table
+                        "tot_democrat": totalMembersPerParty("D").length,
+                        "tot_republican": totalMembersPerParty("R").length,
+                        "tot_independent": totalMembersPerParty("I").length,
+                        "tot_represantives": totalMembersPerParty("D").length + totalMembersPerParty("R").length + totalMembersPerParty("I").length,
+                        "democrats_avg_votes_with_party": findAverageParty("D"),
+                        "republican_avg_votes_with_party": findAverageParty("R"),
+                        "independent_avg_votes_with_party": findAverageParty("I"),
+                        "percentage_votes_with_party": sumAvgTotal(),
+
+                  },
+                    { //Engagement table 
+                        "least_engaged": lowestTenPercentOfEngaged().map(person => ({
+                            Name: [person.first_name, person.middle_name, person.last_name].join(" "),
+                            Votes: person.missed_votes,
+                            VotesPerc: person.missed_votes_pct
+                        })),
+                        "most_engaged": greaterTenPercentOfEngaged().map(person => ({
+                            Name: [person.first_name, person.middle_name, person.last_name].join(" "),
+                            Votes: person.missed_votes,
+                            VotesPerc: person.missed_votes_pct
+                        }))
                   }
-                  ]
+                       ]
+
+                //give VALUES to the global var
+                glance = statistics[0];
+                tableAtGlance = Object.values(glance);
+                engagementTable = statistics[1];
+
+                //Call the functions to display data
+                createGlanceTable(tableAtGlance);
+                createEngTable(engagementTable["least_engaged"], "least-engaged-table");
+                createEngTable(engagementTable["most_engaged"], "most-engaged-table");
+
+            }).catch(function (error) {
+                console.log(error)
+            })
+    }
+
+    //Find how many members are in each party
+    function totalMembersPerParty(party) {
+        var total = members.filter(member => member.party === party);
+        return total;
+    }
+
+    //Find the TOT % of voting for each party
+    function sumPercentByParty(array) {
+
+        var totalPercent = array.reduce((accumulator, percentage) => accumulator + percentage.votes_with_party_pct, 0);
+        return totalPercent;
+    }
 
 
-//Find how many members are in each party
-function totalMembersPerParty (party) {
-    var total = members.filter(member => member.party === party);
-    return total;
+    //Find the AVERAGE % of voting for each party 
+    function findAverageParty(array) {
+
+        var average = sumPercentByParty(totalMembersPerParty(array)) / totalMembersPerParty(array).length;
+        if (isNaN(average))
+            average = 0
+
+        return average.toFixed(2);
+    }
+
+    //Find the TOT of avg % of voting for each party 
+    function sumAvgTotal() {
+        let demo = (sumPercentByParty(totalMembersPerParty("D")) / totalMembersPerParty("D").length) * (totalMembersPerParty("D").length / members.length);
+        if (isNaN(demo))
+            demo = 0
+        let rep = (sumPercentByParty(totalMembersPerParty("R")) / totalMembersPerParty("R").length) * (totalMembersPerParty("R").length / members.length)
+        if (isNaN(rep))
+            rep = 0
+        let ind = (sumPercentByParty(totalMembersPerParty("I")) / totalMembersPerParty("I").length) * (totalMembersPerParty("I").length / members.length)
+        console.log(isNaN(ind))
+        if (isNaN(ind))
+            ind = 0;
+
+        return (demo + rep + ind).toFixed(2)
+    }
+
+
+    //Generate the 'Senate/House at a glance' table
+    function createGlanceTable(array) {
+
+        var demoRow = document.createElement("tr");
+
+        var democrats = demoRow.insertCell();
+        democrats.innerHTML = "Democrats";
+        var demoTotal = demoRow.insertCell();
+        demoTotal.innerHTML = statistics[0]["tot_democrat"];
+        var demoAve = demoRow.insertCell();
+        demoAve.innerHTML = array[4] + ' %';
+
+        var repRow = document.createElement("tr");
+
+        var republicans = repRow.insertCell();
+        republicans.innerHTML = "Republicans";
+        var repTotal = repRow.insertCell();
+        repTotal.innerHTML = statistics[0]["tot_republican"];
+        var repAve = repRow.insertCell();
+        repAve.innerHTML = array[5] + ' %';
+
+        var indRow = document.createElement("tr");
+
+        var independent = indRow.insertCell();
+        independent.innerHTML = "Independent";
+        var indTotal = indRow.insertCell();
+        indTotal.innerHTML = statistics[0]["tot_independent"];
+        var indAve = indRow.insertCell();
+        indAve.innerHTML = array[6] + ' %';
+
+        var totRow = document.createElement("tr");
+
+        var totRepres = totRow.insertCell();
+        totRepres.innerHTML = "Total";
+        var numRepres = totRow.insertCell();
+        numRepres.innerHTML = statistics[0]["tot_represantives"];
+        var prcVotes = totRow.insertCell();
+        prcVotes.innerHTML = array[7] + ' %';
+
+        document.getElementById("glance-table-body").appendChild(demoRow);
+        document.getElementById("glance-table-body").appendChild(repRow);
+        document.getElementById("glance-table-body").appendChild(indRow);
+        document.getElementById("glance-table-body").appendChild(totRow);
+    }
+
+    //Find least engaged     
+    function lowestTenPercentOfEngaged() {
+        var votes = [];
+        var lowestTenPercent = [];
+
+        members.sort(function (a, b) {
+            return a.missed_votes_pct - b.missed_votes_pct;
+        });
+        for (i = 0; i < members.length; i++) {
+            votes.push(members[i]);
+        }
+        for (i = 0; i < votes.length; i++) {
+            if (i < ((votes.length) * 0.1)) {
+                lowestTenPercent.push(votes[i]);
+            } else if (votes[i] == votes[i - 1]) {
+                lowestTenPercent.push(votes[i]);
+            }
+        }
+        return lowestTenPercent;
+    }
+
+    //Find most engaged     
+    function greaterTenPercentOfEngaged() {
+        var votes = [];
+        var greaterTenPercent = [];
+
+        members.sort(function (a, b) {
+            return b.missed_votes_pct - a.missed_votes_pct;
+        });
+        for (i = 0; i < members.length; i++) {
+            votes.push(members[i]);
+        }
+        for (i = 0; i < votes.length; i++) {
+            if (i < ((votes.length) * 0.1)) {
+                greaterTenPercent.push(votes[i]);
+            } else if (votes[i] == votes[i - 1]) {
+                greaterTenPercent.push(votes[i]);
+            }
+        }
+        return greaterTenPercent;
+    }
+
+    //Engagement tables
+    function createEngTable(array, id) {
+        for (var i = 0; i < array.length; i++) {
+
+            var row = document.createElement("tr");
+            var names = document.createElement("td");
+            var cellContent = names.innerHTML = array[i]["Name"];
+            var cellLink = members[i].url;
+            names.innerHTML = cellContent.link(cellLink);
+            var votes = document.createElement("td");
+            votes.innerHTML = array[i]["Votes"];
+            var prc = document.createElement("td");
+            prc.innerHTML = array[i]["VotesPerc"] + ' %';
+
+            row.appendChild(names)
+            row.appendChild(votes)
+            row.appendChild(prc)
+            document.getElementById(id).appendChild(row);
+
+        }
+    }
+
 }
 
+//Loyalty Tables
+if (location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-party-loyalty.html' || location.pathname == "/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-party-loyalty.html") {
 
-//Function to find the TOT % of voting for each party
-function sumPercentByParty(array){
+    var loyaltyTable;
 
-    var totalPercent = array.reduce((accumulator, percentage) => accumulator + percentage.votes_with_party_pct, 0);
-    return totalPercent; 
-}    
+    if (location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/senate-party-loyalty.html') {
+        getData("senate");
+    }
+    if (location.pathname == '/C:/Users/bambo/OneDrive/Desktop/TGIF%20Project/house-party-loyalty.html') {
+        getData("house");
+    }
 
-/*--------------------------------------------------------*/
-//Creates arrays to work with in order to create the tables.
-var glance = statistics[0];
-var tableAtGlance = Object.values(glance);
+    function getData(chamber) {
+        fetch("https://api.propublica.org/congress/v1/113/" + chamber + "/members.json", {
 
-//Function to create the 'Senate at a glance' table
-createGlanceTable(tableAtGlance);
-function createGlanceTable(array){
-    
-    var demoRow = document.createElement("tr");
-    
-    var democrats = demoRow.insertCell();
-    democrats.innerHTML= "Democrats";
-    var demoTotal = demoRow.insertCell();
-    demoTotal.innerHTML = statistics[0]["tot_democrat"];
-    var demoAve = demoRow.insertCell();
-    demoAve.innerHTML = array[4] + ' %';
-    
-    var repRow = document.createElement("tr");
-    
-    var republicans = repRow.insertCell();
-    republicans.innerHTML= "Republicans";
-    var repTotal = repRow.insertCell();
-    repTotal.innerHTML = statistics[0]["tot_republican"];
-    var repAve = repRow.insertCell();
-    repAve.innerHTML = array[5] + ' %';
-    
-    var indRow = document.createElement("tr");
-    
-    var independent = indRow.insertCell();
-    independent.innerHTML= "Independent";
-    var indTotal = indRow.insertCell();
-    indTotal.innerHTML = statistics[0]["tot_independent"];
-    var indAve = indRow.insertCell();
-    indAve.innerHTML = array[6] + ' %';
-    
-    var totRow = document.createElement("tr");
-    
-    var totRepres = totRow.insertCell();
-    totRepres.innerHTML= "Total";
-    var numRepres = totRow.insertCell();
-    numRepres.innerHTML = statistics[0]["tot_represantives"];
-    var prcVotes = totRow .insertCell();
-    prcVotes.innerHTML = array[7] + ' %';
-    
-    document.getElementById("glance-table-body").appendChild(demoRow);
-    document.getElementById("glance-table-body").appendChild(repRow);
-    document.getElementById("glance-table-body").appendChild(indRow);
-    document.getElementById("glance-table-body").appendChild(totRow);
+                method: "GET",
+                headers: new Headers({
+                    "X-API-Key": '8pToDd0vDGdgeKF7E7BH3SfKcegp4QMJowvY45sN'
+                })
+            })
+
+            .then(function (response) {
+                return response.json();
+            }).then(function (json) {
+                data = json;
+                members = data.results[0].members;
+
+                var statistics = { //Loyalty tables
+                    "least_loyal": lowestTenPercentOfVoters().map(person => ({
+                        Name: [person.first_name, person.middle_name, person.last_name].join(" "),
+                        Votes: person.total_votes,
+                        VotesPerc: person.votes_with_party_pct
+                    })),
+                    "most_loyal": greaterTenPercentOfVoters().map(person => ({
+                        Name: [person.first_name, person.middle_name, person.last_name].join(" "),
+                        Votes: person.total_votes,
+                        VotesPerc: person.votes_with_party_pct
+                    }))
+
+                }
+
+                loyaltyTable = statistics;
+                createLoyalTable(loyaltyTable["least_loyal"], "least-loyal-table");
+                createLoyalTable(loyaltyTable["most_loyal"], "most-loyal-table");
+
+            }).catch(function (error) {
+                console.log(error)
+            })
+    }
+
+    //Find least loyal    
+    function lowestTenPercentOfVoters() {
+        var votes = [];
+        var lowestTenPercent = [];
+
+        members.sort(function (a, b) {
+            return a.votes_with_party_pct - b.votes_with_party_pct;
+        });
+        for (i = 0; i < members.length; i++) {
+            votes.push(members[i]);
+        }
+        for (i = 0; i < votes.length; i++) {
+            if (i < ((votes.length) * 0.1)) {
+                lowestTenPercent.push(votes[i]);
+            } else if (votes[i] == votes[i - 1]) {
+                lowestTenPercent.push(votes[i]);
+            }
+        }
+        return lowestTenPercent;
+    }
+
+    //Find most loyal     
+    function greaterTenPercentOfVoters() {
+        var votes = [];
+        var greaterTenPercent = [];
+
+        members.sort(function (a, b) {
+            return b.votes_with_party_pct - a.votes_with_party_pct;
+        });
+        for (i = 0; i < members.length; i++) {
+            votes.push(members[i]);
+        }
+        for (i = 0; i < votes.length; i++) {
+            if (i < ((votes.length) * 0.1)) {
+                greaterTenPercent.push(votes[i]);
+            } else if (votes[i] == votes[i - 1]) {
+                greaterTenPercent.push(votes[i]);
+            }
+        }
+        return greaterTenPercent;
+    }
+
+    //Loyalty tables
+    function createLoyalTable(array, id) {
+        for (var i = 0; i < array.length; i++) {
+
+            var row = document.createElement("tr");
+            var names = document.createElement("td");
+            var cellContent = names.innerHTML = array[i]["Name"];
+            var cellLink = members[i].url;
+            names.innerHTML = cellContent.link(cellLink);
+            var votes = document.createElement("td");
+            votes.innerHTML = array[i]["Votes"];
+            var prc = document.createElement("td");
+            prc.innerHTML = array[i]["VotesPerc"] + ' %';
+
+            row.appendChild(names)
+            row.appendChild(votes)
+            row.appendChild(prc)
+            document.getElementById(id).appendChild(row);
+        }
+
+    }
 }
-
-/*----------------------------------------------------------------*/
-
