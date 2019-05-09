@@ -1,3 +1,7 @@
+$(window).load(function () {
+    $('#floatBarsG').fadeOut();
+});
+
 var members;
 //Senate & House Pages
 if (location.pathname == '/senate-data.html' || location.pathname == "/house-data.html") {
@@ -5,7 +9,7 @@ if (location.pathname == '/senate-data.html' || location.pathname == "/house-dat
     var democratButton = document.getElementById("democrat-button");
     var independentButton = document.getElementById("independent-button");
     var republicanButton = document.getElementById("republican-button");
-    var input = document.getElementById("state-filter")
+    var input = document.getElementById("state-filter");
 
     if (location.pathname == '/senate-data.html') {
         getData("senate");
@@ -139,6 +143,8 @@ if (location.pathname == '/senate-data.html' || location.pathname == "/house-dat
                 }
             }
         }
+        const checkedParties = [...document.querySelectorAll("input:checked")].map(input => input.value);
+        members.filter
 
         return checkboxesValuesArray;
     }
@@ -147,7 +153,6 @@ if (location.pathname == '/senate-data.html' || location.pathname == "/house-dat
     //Generate a dropdown menu with "state" options.
     function createDropOptions() {
 
-        console.log(input)
         var optionsArray = members.map(getState => getState.state);
         optionsArray.sort();
 
@@ -340,6 +345,8 @@ if (location.pathname == '/house-attendance.html' || location.pathname == "/sena
                 lowestTenPercent.push(votes[i]);
             } else if (votes[i] == votes[i - 1]) {
                 lowestTenPercent.push(votes[i]);
+            } else {
+                break;
             }
         }
         return lowestTenPercent;
