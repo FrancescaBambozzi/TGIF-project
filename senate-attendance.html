@@ -10,7 +10,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <title>Senate Attendance</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -27,26 +27,26 @@
                 <div class="container-fluid">
 
                     <ul class="nav navbar-nav">
-                        <li><a href="/home.html">Home</a></li>
+                        <li><a href="home.html">Home</a></li>
                         <!--Congress dropdown-->
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Congress 113 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/senate-data.html">Senate</a></li>
-                                <li><a href="/house-data.html">House</a></li>
+                                <li><a href="senate-data.html">Senate</a></li>
+                                <li><a href="house-data.html">House</a></li>
                             </ul>
                         </li>
                         <!--Attendance dropdown-->
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Attendance <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li class="active"><a href="/senate-attendance.html">Senate Attendance</a></li>
-                                <li><a href="/house-attendance.html">House Attendance</a></li>
+                                <li class="active"><a href="senate-attendance.html">Senate Attendance</a></li>
+                                <li><a href="house-attendance.html">House Attendance</a></li>
                             </ul>
                         </li>
                         <!--Loyalty dropdown-->
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Party Loyalty <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/senate-party-loyalty.html">Senate Loyalty</a></li>
-                                <li><a href="/house-party-loyalty.html">House Loyalty</a></li>
+                                <li><a href="senate-party-loyalty.html">Senate Loyalty</a></li>
+                                <li><a href="house-party-loyalty.html">House Loyalty</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -97,36 +97,15 @@
                 <div class="col-lg-6">
 
                     <h2>Senate at a glance</h2>
-                    <table class="table table-striped" v-if="isLoadding == false">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Party</th>
-                                <th>N° of Representatives</th>
-                                <th>Votes with Party</th>
+                                <th>Number of Reps</th>
+                                <th>% Voted with Prty</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr v-for="statistic in statistics">
-                                <td>Democrats</td>
-                                <td>{{statistic.tot_democrat}}</td>
-                                <td>{{statistic.democrats_avg_votes_with_party}}</td>
-                            </tr>
-                            <tr v-for="statistic in statistics">
-                                <td>Republicans</td>
-                                <td>{{statistic.tot_republican}}</td>
-                                <td>{{statistic.republican_avg_votes_with_party}}</td>
-                            </tr>
-                            <tr v-for="statistic in statistics">
-                                <td>Independent</td>
-                                <td>{{statistic.tot_independent}}</td>
-                                <td>{{statistic.independent_avg_votes_with_party}}</td>
-                            </tr>
-                            <tr v-for="statistic in statistics">
-                                <td>Totals</td>
-                                <td>{{statistic.tot_represantives}}</td>
-                                <td>{{statistic.percentage_votes_with_party}}</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="glance-table-body"></tbody>
                     </table>
                 </div>
             </div>
@@ -138,17 +117,11 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>N° of Missed Votes</th>
-                                <th>Percentage of Missed Votes</th>
+                                <th>Number of Missed Votes</th>
+                                <th>% Missed</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr v-for="member in members">
-                                <td>{{statistic.least_engaged["Name"]}}</td>
-                                <td>{{statistic.least_engaged["Votes"]}}</td>
-                                <td>{{statistic.least_engaged["VotesPerc"]}}</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="least-engaged-table"></tbody>
                     </table>
                 </div>
 
@@ -158,17 +131,11 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>N° of Missed Votes</th>
-                                <th>Percentage of Missed Votes</th>
+                                <th>Number of Missed Votes</th>
+                                <th>% Missed</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr v-for="member in members">
-                                <td>{{statistic.most_engaged["Name"]}}</td>
-                                <td>{{statistic.most_engaged["Votes"]}}</td>
-                                <td>{{statistic.most_engaged["VotesPerc"]}}</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="most-engaged-table"></tbody>
                     </table>
                 </div>
             </div>
@@ -183,7 +150,7 @@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <!--- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="main-vue.js"></script>
+    <script src="script/main.js"></script>
     <!--Bootstrap-->
     <script src="js/bootstrap.min.js"></script>
 

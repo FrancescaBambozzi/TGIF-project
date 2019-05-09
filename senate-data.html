@@ -8,10 +8,10 @@
     <!-- Bootstrao Mobile-First approach-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <title>Senate</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -28,29 +28,28 @@
                 <div class="container-fluid">
 
                     <ul class="nav navbar-nav">
-                        <li><a href="/home.html">Home</a></li>
+                        <li><a href="home.html">Home</a></li>
                         <!--Congress dropdown-->
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Congress 113
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li class="active"><a href="/senate-data.html">Senate</a></li>
-                                <li><a href="/house-data.html">House</a></li>
+                                <li class="active"><a href="senate-data.html">Senate</a></li>
+                                <li><a href="house-data.html">House</a></li>
                             </ul>
                         </li>
                         <!--Attendance dropdown-->
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Attendance <span
-                                    class="caret"></span></a>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Attendance <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/senate-attendance.html">Senate Attendance</a></li>
-                                <li><a href="/house-attendance.html">House Attendance</a></li>
+                                <li><a href="senate-attendance.html">Senate Attendance</a></li>
+                                <li><a href="house-attendance.html">House Attendance</a></li>
                             </ul>
                         </li>
                         <!--Loyalty dropdown-->
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Party Loyalty
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/senate-party-loyalty.html">Senate Loyalty</a></li>
-                                <li><a href="/house-party-loyalty.html">House Loyalty</a></li>
+                                <li><a href="senate-party-loyalty.html">Senate Loyalty</a></li>
+                                <li><a href="house-party-loyalty.html">House Loyalty</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -70,6 +69,7 @@
             </nav>
         </header>
 
+       <!--- MAIN CONTENT --->
         <div class="container main-container">
 
             <div class="row">
@@ -123,8 +123,7 @@
 
                         <table id="dataTable" class="table table-striped" v-if="isLoadding == false">
                             <tr v-for="member in filteredMembers">
-                                <td>{{member.first_name}} <span
-                                        v-if="member.middle_name != null">{{member.middle_name}}</span>
+                                <td>{{member.first_name}} <span v-if="member.middle_name != null">{{member.middle_name}}</span>
                                     {{member.last_name}}</td>
                                 <td>{{member.state}}</td>
                                 <td>{{member.party}}</td>
@@ -155,9 +154,9 @@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <!--- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="main-vue.js"></script>
+    <script src="vue/main-vue.js"></script>
     <!--Bootstrap-->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 </body>
 
